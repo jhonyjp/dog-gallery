@@ -15,15 +15,7 @@ dogImages: DogApiResponse[] = [];
   }
 
   getImages(){
-    this.dogApiService.getImagesRandomDog().subscribe(
-      (response) => {
-        this.dogImages = response;
-      },
-      (error) => {
-        console.error(error);
-      }
-
-    )
+    
   
   }
 
