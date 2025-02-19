@@ -55,17 +55,21 @@ dogImages: DogImage [] = [];
   
   onUpload() {
     if (!this.selectedFile) {
-      alert('Please select a file');
+      console.log('Please select a file');
       return;
     }
+
     this.uploadService.postImageDog(this.selectedFile, this.subId).subscribe({
       next: (response) => {
         this.imagePreview = response.url;
-        alert('Image uploaded successfully');
+        console.log('Image uploaded successfully');
         this.selectedFile = null;
       },
       error: (error) => {
         console.error('There was an error!', error);
+        if (error.error) {
+          console.error('Error details:', error.error);
+        }
       }
     });
   

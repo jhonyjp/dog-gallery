@@ -13,13 +13,22 @@ export class UploadApiService {
       const formData = new FormData();
       formData.append('file', file);
       formData.append('sub_id', subId);
+
+      
       
       const headers = new HttpHeaders({ 
         'x-api-key': 'live_cm3phSOhXutxYYMDZ1X3qhT5PexIKSxYDQPOA5yl6TfHZq2zCGSYoFnwhxSYtlPN',
-      'content-type': 'application/json'
       });
-      return this.http.post(this.API_URL,  headers);
+
+       // Log the request details
+    console.log('Request URL:', this.API_URL);
+    console.log('Request Headers:', headers);
+    console.log('Form Data:', formData.get('file'), formData.get('sub_id'));
+
+      return this.http.post(this.API_URL, formData, { headers });
     }
+
+    
 
   
 }

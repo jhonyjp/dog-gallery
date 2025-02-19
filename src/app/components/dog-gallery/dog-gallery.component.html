@@ -1,6 +1,6 @@
 <div class="container">
   <div class="upload-container">
-    <h3>Upload de Imagem</h3>
+    <h3 class="messag1">Adicione a foto do seu dog    </h3>
     <input type="file" (change)="onFileSelected($event)"/>
     <p *ngIf="selectedFile">Imagem selecionada: {{selectedFile.name}}</p>
     <p *ngIf="selectedFile">Tamanho da imagem: {{selectedFile.size / 1024 / 1024 | number: '1.2-2'}} MB</p>
@@ -8,10 +8,12 @@
   
 
     <button class="btn btn-primary" (click)="onUpload()" [disabled]="!selectedFile">Enviar</button>
-    <div *ngIf="imagePreview">
-      <h4>Imagem Enviada</h4>
-      <img [src]="imagePreview" alt="Imagem enviada" />
+  
     </div>
+
+    <div *ngIf="imagePreview" class="image-preview-container">
+      <h4 class="message">Imagem Enviada</h4>
+      <img [src]="imagePreview" alt="Imagem enviada" />
     </div>
  
 
