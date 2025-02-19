@@ -18,7 +18,7 @@ export class UploadApiService {
         'x-api-key': 'live_cm3phSOhXutxYYMDZ1X3qhT5PexIKSxYDQPOA5yl6TfHZq2zCGSYoFnwhxSYtlPN',
       'content-type': 'application/json'
       });
-      return this.http.post(this.API_URL, { headers});
+      return this.http.post(this.API_URL,  headers);
     }
 
   

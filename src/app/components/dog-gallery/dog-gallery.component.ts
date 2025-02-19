@@ -14,7 +14,7 @@ interface DogImage{
   styleUrls: ['./dog-gallery.component.css']
 })
 export class DogGalleryComponent implements OnInit {
-  selectedFile!: File;
+  selectedFile: File | null = null;
   imagePreview: string | null = null;
   subId: string = '';
 dogImages: DogImage [] = [];
@@ -41,16 +41,15 @@ dogImages: DogImage [] = [];
     
   }
 
+
+
   onFileSelected(event: Event): void {
-    const fileInput = event.target as HTMLInputElement;
-    if (fileInput.files && fileInput.files[0]) {
+    const fileInput = event.target as HTMLInputElement | null;
+    if (fileInput && fileInput.files && fileInput.files[0]) {
       this.selectedFile = fileInput.files[0];
-      const reader = new FileReader();
-      reader.onload = () => {
-        this.imagePreview = reader.result as string;
+      this.imagePreview = null;
       };
-      reader.readAsDataURL(this.selectedFile);
-    }
+    
   }
   
   
@@ -61,7 +60,9 @@ dogImages: DogImage [] = [];
     }
     this.uploadService.postImageDog(this.selectedFile, this.subId).subscribe({
       next: (response) => {
-       this.imagePreview = response.url;
+        this.imagePreview = response.url;
+        alert('Image uploaded successfully');
+        this.selectedFile = null;
       },
       error: (error) => {
         console.error('There was an error!', error);
@@ -69,5 +70,6 @@ dogImages: DogImage [] = [];
     });
   
 }
+
 }
       
