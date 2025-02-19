@@ -1,1 +1,22 @@
-<p>dog-gallery works!</p>
+
+
+<div class="container">
+  <div class="upload-container">
+  <h3>Upload de Imagem</h3>
+   
+  <input type="file" (change)="onFileSelected($event)"/>
+  <button class="btn btn-primary" (click)="onUpload()" [disabled]="!selectedFile">Upload</button>
+
+  <div *ngIf="imagePreview">
+      <h4>Imagem Enviada</h4>
+      <img [src]="imagePreview" alt="Imagem enviada" />
+  </div>
+</div>
+  <h2 class="text-center">Dog Gallery</h2>
+
+ <div class="gallery">
+    <div class="image-card" *ngFor="let dog of dogImages">
+      <img [src]="dog.url" alt="dog.breedName" >
+      <p> <strong>{{dog.breedName}}</strong></p>
+    </div>
+ </div>

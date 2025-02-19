@@ -1,33 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
-export interface DogApiResponse {
-  [x: string]: any;
-  breeds: {
-    weight: {
-      imperial: string;
-      metric: string;
-    };
-    height: {
-      imperial: string;
-      metric: string;
-    };
-    id: number;
-    name: string;
-    country_code?: string;
-    bred_for?: string;
-    breed_group?: string;
-    life_span: string;
-    temperament: string;
-    reference_image_id: string;
-    origin?: string;
-  }[];
-  id: string;
-  url: string;
-  width: number;
-  height: number;
-}
+import { DogApiResponse } from 'src/app/models/dog-api-response';
 
 @Injectable({
   providedIn: 'root'
@@ -37,8 +11,13 @@ export class DogApiService {
  private API_URL = 'https://api.thedogapi.com/v1/images/search';
   constructor(private http: HttpClient) { }
 
-  getImagesRandomDog(): Observable<DogApiResponse> {
-    return this.http.get<DogApiResponse>(this.API_URL);
+  getImagesRandomDog(limit: number=15, breedId?: string): Observable<DogApiResponse[]> {
+    let params = new HttpParams().set('limit', limit.toString()); 
+    const headers = new HttpHeaders({ 
+      'x-api-key': 'live_cm3phSOhXutxYYMDZ1X3qhT5PexIKSxYDQPOA5yl6TfHZq2zCGSYoFnwhxSYtlPN',
+    'content-type': 'application/json'
+    });
+    return this.http.get<DogApiResponse[]>(this.API_URL, { headers, params });
   }
 
 
